@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 浮动按钮圆形背景 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#2196F3" />
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" />
+    <size
+        android:width="28dp"
+        android:height="28dp" />
+</shape>

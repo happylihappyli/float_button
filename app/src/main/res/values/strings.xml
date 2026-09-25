@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">浮动按钮</string>
+    <string name="open_float_window">开启悬浮窗</string>
+    <string name="close_float_window">关闭悬浮窗</string>
+    <string name="float_window_guide">请先开启悬浮窗权限，然后点击下方按钮启动悬浮窗</string>
+    <string name="need_permission">需要悬浮窗权限</string>
+    <string name="go_settings">去设置</string>
+    <string name="service_running">悬浮窗已开启</string>
+    <string name="service_stopped">悬浮窗已关闭</string>
+    <string name="phrases">常用语</string>
+    <string name="flashlight">手电筒</string>
+    <string name="quick_mute">快捷静音</string>
+    <string name="flip_to_mute">翻转静音</string>
+    <string name="more_features">更多功能</string>
+    <string name="copied">已复制</string>
+
+    <!-- 功能按钮的简短标签（显示在按钮 emoji 下面） -->
+    <string name="flashlight_short">🔦\n手电</string>
+    <string name="mute_short">🔇\n静音</string>
+    <string name="flip_mute_short">🔄\n翻转</string>
+    <string name="more_short">⋯\n更多</string>
+
+    <!-- 长按按钮弹出的功能详细说明 -->
+    <string name="flashlight_long_title">手电筒</string>
+    <string name="flashlight_long_desc">点击开启/关闭手机背面的闪光灯。\n长按任意位置移动悬浮按钮。</string>
+
+    <string name="mute_long_title">一键静音</string>
+    <string name="mute_long_desc">• 点一下：把媒体/通知/闹钟/铃声声音全部置 0\n• 再点一下：按静音前的音量自动恢复\n• 看短剧/视频遇到广告一键用\n• 不会改你之前调好的音量</string>
+
+    <string name="flip_mute_long_title">翻转手机自动静音</string>
+    <string name="flip_mute_long_desc">• 点 🔄 开启（图标会变 ⏹）\n• 把手机翻过去屏幕朝下 → 自动静音\n• 翻回屏幕朝上 → 自动恢复音量\n• 再点 ⏹ 关闭监听\n\n最适合：短剧插广告时把手机往桌上一扣，结束再翻回来。</string>
+
+    <string name="more_long_title">更多功能</string>
+    <string name="more_long_desc">敬请期待…\n（你也可以提需求，常用的就加进来）</string>
+
+    <string name="dialog_btn_got_it">知道了</string>
+    <string name="dialog_btn_cancel">取消</string>
+    <string name="dialog_btn_open">开启</string>
+    <string name="dialog_btn_close">关闭</string>
+</resources>

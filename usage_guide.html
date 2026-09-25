@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动按钮 - 使用指南</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+        .section {
+            padding: 24px 30px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .section:last-child { border-bottom: none; }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-icon.blue { background: #E3F2FD; }
+        .section-icon.green { background: #E8F5E9; }
+        .section-icon.orange { background: #FFF3E0; }
+        .section-icon.purple { background: #F3E5F5; }
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px;
+            background: #FAFAFA;
+            border-radius: 12px;
+        }
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #2196F3;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .step-text strong { color: #333; }
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+            border-left: 4px solid #FFC107;
+        }
+        .highlight-box p {
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.6;
+        }
+        .feature-card {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 12px;
+        }
+        .feature-card h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .bottom-tip {
+            background: #F5F5F5;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        .bottom-tip p {
+            font-size: 14px;
+            color: #888;
+        }
+        .phone-mockup {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            display: block;
+        }
+        .float-btn-demo {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .flip-icon {
+            animation: flip 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+        @keyframes flip {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="float-btn-demo">
+                <circle cx="32" cy="32" r="28" fill="#FFFFFF" stroke="#2196F3" stroke-width="4"/>
+                <path d="M24 32H40M32 24V40" stroke="#2196F3" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h1>浮动按钮</h1>
+            <p>你的效率神器，随时待命</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon blue">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1976D2" stroke-width="2">
+                        <path d="M12 2v20M2 12h20"/>
+                    </svg>
+                </div>
+                <span>什么是浮动按钮？</span>
+            </div>
+            <div class="feature-card">
+                <p>浮动按钮是一个悬浮在屏幕上的小工具，无论你在哪个App，都能随时调出常用功能：快速复制常用语、翻转静音、手电筒等，让操作更高效！</p>
+            </div>
+            <div style="text-align:center; margin-top:16px;">
+                <svg class="phone-mockup" viewBox="0 0 280 580" fill="none">
+                    <rect x="20" y="20" width="240" height="540" rx="40" fill="#1a1a1a"/>
+                    <rect x="30" y="30" width="220" height="520" rx="30" fill="white"/>
+                    <rect x="40" y="60" width="200" height="460" fill="#FAFAFA"/>
+                    <circle cx="140" cy="200" r="30" fill="#2196F3" opacity="0.9"/>
+                    <path d="M125 200H155M140 185V215" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                    <rect x="60" y="280" width="160" height="40" rx="8" fill="white" stroke="#E0E0E0"/>
+                    <text x="75" y="307" font-size="14" fill="#333">常用语1</text>
+                    <rect x="60" y="335" width="160" height="40" rx="8" fill="white" stroke="#E0E0E0"/>
+                    <text x="75" y="362" font-size="14" fill="#333">常用语2</text>
+                    <rect x="60" y="390" width="160" height="40" rx="8" fill="white" stroke="#E0E0E0"/>
+                    <text x="75" y="417" font-size="14" fill="#333">常用语3</text>
+                    <rect x="125" y="515" width="30" height="30" rx="15" fill="#333"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon green">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <span>添加快捷语句</span>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><strong>点击浮动按钮</strong><br>展开功能面板</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>点击"编辑"按钮</strong><br>进入常用语管理界面</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><strong>添加/编辑语句</strong><br>保存后立即生效</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text"><strong>点击语句直接复制</strong><br>粘贴到任何聊天框</div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>💡 实用场景：</strong>客服回复、社群互动、日常聊天，把常用话术存起来，一键复制！</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon orange">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF9800" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="4"/>
+                        <path d="M8 16h8M12 8v8" stroke-linecap="round" class="flip-icon"/>
+                    </svg>
+                </div>
+                <span>翻转自动静音</span>
+            </div>
+            <div class="feature-card">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF9800" stroke-width="2">
+                        <polygon points="10,2 13,7 18,7 14,11 15,16 10,13 5,16 6,11 2,7 7,7"/>
+                    </svg>
+                    短剧广告神器
+                </h3>
+                <p>看短剧时，每集结尾都有广告，声音突然变大很烦人？开启翻转静音，手机翻过来自动静音，翻回去自动恢复！</p>
+            </div>
+            <div style="text-align:center; margin-top:16px;">
+                <svg width="240" height="120" viewBox="0 0 240 120" fill="none">
+                    <rect x="20" y="20" width="80" height="100" rx="8" fill="#E0E0E0"/>
+                    <rect x="30" y="40" width="60" height="50" fill="#1a1a1a"/>
+                    <rect x="45" y="55" width="30" height="20" rx="4" fill="#2196F3"/>
+                    <circle cx="60" cy="70" r="6" fill="white"/>
+                    <path d="M55 75L60 80L65 75" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <text x="50" y="115" font-size="12" fill="#666">正常播放</text>
+                    <rect x="140" y="20" width="80" height="100" rx="8" fill="#E0E0E0" transform="rotate(180 180 70)"/>
+                    <rect x="150" y="40" width="60" height="50" fill="#424242"/>
+                    <rect x="165" y="55" width="30" height="20" rx="4" fill="#9E9E9E"/>
+                    <rect x="56" y="66" width="8" height="8" rx="1" fill="#9E9E9E"/>
+                    <path d="M52 75L60 80L68 75" stroke="#9E9E9E" stroke-width="2" stroke-linecap="round"/>
+                    <text x="145" y="115" font-size="12" fill="#666">翻转静音</text>
+                    <path d="M100 60 L140 60" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="4 4"/>
+                    <text x="110" y="50" font-size="12" fill="#9E9E9E">翻一转</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon purple">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9C27B0" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span>更多实用功能</span>
+            </div>
+            <div class="feature-card">
+                <h3>🔦 手电筒</h3>
+                <p>一键开启/关闭手机闪光灯，夜间使用超方便！</p>
+            </div>
+            <div class="feature-card">
+                <h3>📋 双击复制</h3>
+                <p>在面板中双击常用语，直接复制到剪贴板，无需打开面板！</p>
+            </div>
+            <div class="feature-card">
+                <h3>🗑️ 右键删除</h3>
+                <p>在常用语上右键，弹出确认对话框后删除，安全放心！</p>
+            </div>
+        </div>
+
+        <div class="bottom-tip">
+            <p>💡 提示：如需后台稳定运行，请将应用加入电池白名单</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 功能面板布局（常用语列表等） -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_panel"
+    android:padding="8dp"
+    android:elevation="8dp">
+
+    <!-- 标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/phrases"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/btn_edit"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:text="✎"
+            android:textSize="16sp"
+            android:textColor="#3366CC"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple" />
+
+        <TextView
+            android:id="@+id/btn_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:text="✕"
+            android:textSize="18sp"
+            android:textColor="#999999"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple" />
+    </LinearLayout>
+
+    <!-- 分隔线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0" />
+
+    <!-- 短语列表容器 -->
+    <LinearLayout
+        android:id="@+id/phrase_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp" />
+
+    <!-- 分隔线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginTop="4dp" />
+
+    <!-- 功能按钮区 -->
+    <LinearLayout
+        android:id="@+id/feature_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/btn_flashlight"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="🔦\n手电"
+            android:textSize="13sp"
+            android:lineSpacingExtra="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/flashlight" />
+
+        <TextView
+            android:id="@+id/btn_mute"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="🔇\n静音"
+            android:textSize="13sp"
+            android:lineSpacingExtra="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/quick_mute" />
+
+        <TextView
+            android:id="@+id/btn_flip_mute"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="🔄\n翻转"
+            android:textSize="13sp"
+            android:lineSpacingExtra="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/flip_to_mute" />
+
+        <TextView
+            android:id="@+id/btn_more"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⋯\n更多"
+            android:textSize="13sp"
+            android:lineSpacingExtra="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_btn_ripple"
+            android:layout_margin="2dp" />
+
+    </LinearLayout>
+</LinearLayout>

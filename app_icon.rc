@@ -1,0 +1,38 @@
+// app_icon.rc - Windows 资源脚本
+// 把 app_icon.ico 编译进 exe，作为应用主图标
+// （任务栏、Alt-Tab、资源管理器、开始菜单都会用这个图标）
+
+#include <windows.h>
+#include "resource.h"
+
+// 主应用图标（IDI_ICON1 是 Windows 资源约定的"应用图标"槽位）
+IDI_ICON1   ICON    "res\\app_icon.ico"
+
+// 程序版本信息（可选，方便在文件属性中查看）
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+FILEFLAGSMASK   0x3fL
+FILEFLAGS       0x0L
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"   // 中文（简体）
+        BEGIN
+            VALUE "CompanyName",      "float_button"
+            VALUE "FileDescription",  "Float Button - 悬浮快捷面板"
+            VALUE "FileVersion",      "1.0.0.0"
+            VALUE "InternalName",     "float_button"
+            VALUE "OriginalFilename", "float_button.exe"
+            VALUE "ProductName",      "Float Button"
+            VALUE "ProductVersion",   "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0804, 1200
+    END
+END

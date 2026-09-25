@@ -1,0 +1,11 @@
+[9:23:34] === WinMain start ===
+[9:23:34] PhraseManager loaded
+[9:23:34] ShortcutManager loaded
+[9:23:34] Window class registered
+[9:23:34] Host window created
+[9:23:34] FloatWindow created
+[9:23:34] FloatWindow shown
+[9:23:35] Tray created
+[9:23:35] Hotkey [Shift+Win+F] registered OK
+[9:23:35] Entering message loop
+[15:5:55] Copied phrase to clipboard

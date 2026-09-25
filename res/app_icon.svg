@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  float_button 应用图标设计稿 (256x256)
+  风格：暗色系 + 悬浮球（核心概念）
+  - 背景：圆角矩形，深蓝紫渐变
+  - 中央：高亮球（径向渐变 + 顶部高光）
+  - 球下方：两道光晕（体现"悬浮"）
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- 背景渐变：深紫到深蓝 -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3A2E6E"/>
+      <stop offset="55%" stop-color="#2A2150"/>
+      <stop offset="100%" stop-color="#1B1740"/>
+    </linearGradient>
+
+    <!-- 球体径向渐变：中心高光，边缘深色 -->
+    <radialGradient id="ball" cx="42%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#BFD7FF"/>
+      <stop offset="65%" stop-color="#5A8BFF"/>
+      <stop offset="100%" stop-color="#1F3FA8"/>
+    </radialGradient>
+
+    <!-- 顶部高光 -->
+    <radialGradient id="hl" cx="50%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 光晕渐变（透明 → 微亮 → 透明）-->
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7AB6FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#7AB6FF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#7AB6FF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 球内字母 F 的颜色 -->
+    <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D4E4FF"/>
+    </linearGradient>
+
+    <!-- 软阴影（在背景上给球一个落地阴影）-->
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 圆角矩形背景（圆角 ~ 40/256 ≈ 15%）-->
+  <rect x="0" y="0" width="256" height="256" rx="48" ry="48" fill="url(#bg)"/>
+
+  <!-- 球下方投影（暗示"悬浮"）-->
+  <ellipse cx="128" cy="210" rx="56" ry="10" fill="url(#shadow)"/>
+
+  <!-- 第一道光晕（球正下方，更亮）-->
+  <ellipse cx="128" cy="200" rx="48" ry="5" fill="url(#ring)" opacity="0.55"/>
+  <!-- 第二道光晕（更靠下，更弱）-->
+  <ellipse cx="128" cy="216" rx="64" ry="4" fill="url(#ring)" opacity="0.30"/>
+
+  <!-- 球体：直径 120，居中偏上 -->
+  <circle cx="128" cy="118" r="60" fill="url(#ball)"/>
+
+  <!-- 顶部高光（叠加在球上）-->
+  <ellipse cx="128" cy="90" rx="40" ry="20" fill="url(#hl)"/>
+
+  <!-- 球内字母 F（象征 Float）-->
+  <g fill="url(#fg)" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="76" text-anchor="middle">
+    <text x="128" y="148">F</text>
+  </g>
+
+  <!-- 球体边缘高光线（增加立体感）-->
+  <circle cx="128" cy="118" r="60" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="1.5"/>
+</svg>

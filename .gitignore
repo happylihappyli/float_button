@@ -1,0 +1,10 @@
+/.gradle/kotlin/errors
+/app/build
+/test
+/app/libs
+/local_m2/org/jetbrains/kotlin/kotlin-stdlib-jdk7
+/obj
+/.gradle
+layout_log.txt
+/local_m2
+bin/float_button.log

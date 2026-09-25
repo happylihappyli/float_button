@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 悬浮按钮的窗口布局 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/float_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- 浮动按钮本体 -->
+    <ImageButton
+        android:id="@+id/btn_float"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@drawable/bg_float_button"
+        android:src="@drawable/ic_float_icon"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/app_name" />
+</LinearLayout>
