@@ -1,0 +1,55 @@
+Program started
+Step 1: Creating Runtime
+Runtime created successfully
+Step 2: Building UI
+UI built successfully
+Step 3: Binding callbacks
+bind_callbacks: start
+bind_callbacks: address_bar found
+bind_callbacks: file_list found
+bind_callbacks: list_title found
+bind_callbacks: status_bar found
+bind_callbacks: refresh_btn found
+bind_callbacks: view_btn found
+bind_callbacks: theme_btn found
+bind_callbacks: cmd_toggle_btn found
+bind_callbacks: menu_settings found
+bind_callbacks: settings_window found
+bind_callbacks: settings_overlay found
+bind_callbacks: drive_window found
+bind_callbacks: drive_overlay found
+bind_callbacks: settings_theme_option found
+bind_callbacks: settings_font_scale_spin found
+bind_callbacks: settings_tree_to_command_checkbox found
+bind_callbacks: settings_command_to_tree_checkbox found
+bind_callbacks: settings_save_btn found
+bind_callbacks: settings_apply_btn found
+bind_callbacks: settings_close_btn found
+bind_callbacks: recycle_sort_option found
+bind_callbacks: recycle_order_button found
+bind_callbacks: recycle_prev_button found
+bind_callbacks: recycle_next_button found
+bind_callbacks: recycle_page_label found
+bind_callbacks: favorites_tree found
+bind_callbacks: dir_tree found
+bind_callbacks: cmd_input found
+bind_callbacks: cmd_cwd_label found
+bind_callbacks: cmd_panel found
+bind_callbacks: cmd_hbox found
+bind_callbacks: cmd_prompt_label found
+bind_callbacks: reset_cmd_btn found
+bind_callbacks: cmd_output found
+bind_callbacks: binding address_bar callback
+bind_callbacks: binding refresh_btn callback
+bind_callbacks: binding view_btn callback
+bind_callbacks: binding theme_btn callback
+bind_callbacks: binding cmd_toggle_btn callback
+bind_callbacks: file_list found, binding callbacks
+bind_callbacks: dir_tree found, binding callbacks
+bind_callbacks: binding cmd_input callback
+bind_callbacks: cmd_input callback bound
+bind_callbacks: done
+Callbacks bound successfully
+Step 4: Setting root
+Root set successfully
+Step 5: Running
