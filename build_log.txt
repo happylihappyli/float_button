@@ -1,5 +1,5 @@
 ﻿scons: Reading SConscript files ...
-[SCons start] 2026-08-28 14:07:34
+[SCons start] 2026-09-26 15:18:42
 scons: done reading SConscript files.
 scons: Building targets ...
 cl /Foobj\main.obj /c src\main.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
@@ -36,27 +36,38 @@ cl /Foobj\config.obj /c src\config.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /
 config.cpp
 cl /Foobj\settings_dialog.obj /c src\settings_dialog.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
 settings_dialog.cpp
-src\settings_dialog.cpp(120): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-src\settings_dialog.cpp(125): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-src\settings_dialog.cpp(132): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-src\settings_dialog.cpp(137): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-src\settings_dialog.cpp(142): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-src\settings_dialog.cpp(146): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
-"D:\Code\anaconda3\python.EXE" "res\gen_icon.py"
-[gen_icon] 开始生成多尺寸图标: [16, 24, 32, 48, 64, 128, 256]
-  - 16x16 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_16.png
-  - 24x24 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_24.png
-  - 32x32 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_32.png
-  - 48x48 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_48.png
-  - 64x64 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_64.png
-  - 128x128 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_128.png
-  - 256x256 OK -> E:\GitHub3\cpp\float_button\res\_debug_icon_256.png
-[gen_icon] 已生成 E:\GitHub3\cpp\float_button\res\app_icon.ico
-[gen_icon] 包含尺寸: [16, 24, 32, 48, 64, 128, 256]
+src\settings_dialog.cpp(163): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(168): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(175): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(180): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(190): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(195): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(200): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(205): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(210): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\settings_dialog.cpp(214): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+cl /Foobj\tts_dialog.obj /c src\tts_dialog.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
+tts_dialog.cpp
+src\tts_dialog.cpp(640): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\tts_dialog.cpp(691): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\tts_dialog.cpp(723): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\tts_dialog.cpp(728): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+cl /Foobj\autostart.obj /c src\autostart.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
+autostart.cpp
+cl /Foobj\llm_client.obj /c src\llm_client.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
+llm_client.cpp
+cl /Foobj\llm_settings_dialog.obj /c src\llm_settings_dialog.cpp /TP /nologo /std:c++20 /utf-8 /EHsc /W3 /Zc:__cplusplus /O2 /MD /nologo /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc
+llm_settings_dialog.cpp
+src\llm_settings_dialog.cpp(187): warning C4312: “类型强制转换”: 从“int”转换到更大的“HMENU”
+src\llm_settings_dialog.cpp(196): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\llm_settings_dialog.cpp(203): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\llm_settings_dialog.cpp(208): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\llm_settings_dialog.cpp(213): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
+src\llm_settings_dialog.cpp(215): warning C4312: “类型强制转换”: 从“const int”转换到更大的“HMENU”
 rc /DUNICODE /D_UNICODE /DWIN32 /D_WIN32_WINNT=0x0601 /DNOMINMAX /Isrc /nologo /foobj\app_icon.res app_icon.rc
-link /nologo /SUBSYSTEM:WINDOWS /ENTRY:WinMainCRTStartup /MACHINE:X64 /nologo /OUT:bin\float_button.exe user32.lib gdi32.lib gdiplus.lib shell32.lib comctl32.lib comdlg32.lib advapi32.lib ole32.lib uuid.lib obj\main.obj obj\float_window.obj obj\phrase_mgr.obj obj\shortcut_mgr.obj obj\shortcut_edit_dialog.obj obj\tray.obj obj\hotkey.obj obj\window_helper.obj obj\phrase_edit_dialog.obj obj\config.obj obj\settings_dialog.obj obj\app_icon.res
-print_finish(["bin\float_button.exe"], ["obj\main.obj", "obj\float_window.obj", "obj\phrase_mgr.obj", "obj\shortcut_mgr.obj", "obj\shortcut_edit_dialog.obj", "obj\tray.obj", "obj\hotkey.obj", "obj\window_helper.obj", "obj\phrase_edit_dialog.obj", "obj\config.obj", "obj\settings_dialog.obj", "obj\app_icon.res"])
-[SCons end] 2026-08-28 14:09:26
+link /nologo /SUBSYSTEM:WINDOWS /ENTRY:WinMainCRTStartup /MACHINE:X64 /nologo /OUT:bin\float_button.exe user32.lib gdi32.lib gdiplus.lib shell32.lib comctl32.lib comdlg32.lib advapi32.lib ole32.lib uuid.lib sapi.lib wininet.lib obj\main.obj obj\float_window.obj obj\phrase_mgr.obj obj\shortcut_mgr.obj obj\shortcut_edit_dialog.obj obj\tray.obj obj\hotkey.obj obj\window_helper.obj obj\phrase_edit_dialog.obj obj\config.obj obj\settings_dialog.obj obj\tts_dialog.obj obj\autostart.obj obj\llm_client.obj obj\llm_settings_dialog.obj obj\app_icon.res
+print_finish(["bin\float_button.exe"], ["obj\main.obj", "obj\float_window.obj", "obj\phrase_mgr.obj", "obj\shortcut_mgr.obj", "obj\shortcut_edit_dialog.obj", "obj\tray.obj", "obj\hotkey.obj", "obj\window_helper.obj", "obj\phrase_edit_dialog.obj", "obj\config.obj", "obj\settings_dialog.obj", "obj\tts_dialog.obj", "obj\autostart.obj", "obj\llm_client.obj", "obj\llm_settings_dialog.obj", "obj\app_icon.res"])
+[SCons end] 2026-09-26 15:19:25
 [Output] E:\GitHub3\cpp\float_button\bin\float_button.exe
 [Status] BUILD SUCCESSFUL
 scons: done building targets.

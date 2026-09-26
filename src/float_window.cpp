@@ -6,6 +6,7 @@
 #include "phrase_edit_dialog.h"
 #include "shortcut_edit_dialog.h"
 #include "settings_dialog.h"
+#include "tts_dialog.h"
 #include "config.h"
 #include <windowsx.h>
 #include <gdiplus.h>
@@ -125,6 +126,7 @@ constexpr int kShortcutsHeaderH = 24;  // "快捷程序" 标题高度
 constexpr int kShortcutItemH = 40;     // 快捷程序每条高度
 constexpr int kShortcutMaxItems = 6;   // 最多显示 6 个快捷程序
 constexpr int kPanelPadding = 8;       // 底边距
+constexpr int kToolbarH = 30;          // 面板底部工具栏高度（TTS 按钮）
 constexpr UINT kTimerEdgeHide = 1;     // 贴边隐藏定时器
 constexpr UINT kTimerEdgeShow = 2;     // 贴边显示定时器
 constexpr LPCWSTR kBtnClass = L"FloatButtonClass";
@@ -143,7 +145,7 @@ int calcMaxItemsForScreen(int shortcutsCount) {
 
     RECT work;
     WinHelper::getWorkArea(work);
-    int availHeight = (work.bottom - work.top) - (kOuter + kSmallTitleH + kPadBottom + kOuter);
+    int availHeight = (work.bottom - work.top) - (kOuter + kSmallTitleH + kToolbarH + kPadBottom + kOuter);
     int shortcutsBlockH = (shortcutsCount > 0)
         ? (kSepGap + kSecTitleH + (int)shortcutsCount * kScItemH)
         : 0;
@@ -291,7 +293,8 @@ void FloatWindow::showPanel() {
     int shortcutsBlockH = (shortcutsToShow > 0)
         ? (kSepGap + kSecTitleH + shortcutsToShow * kScItemH)
         : 0;
-    int contentHeight = kOuter + kSmallTitleH + phraseCount * kItemH + shortcutsBlockH + kPadBottom + kOuter;
+    int contentHeight = kOuter + kSmallTitleH + phraseCount * kItemH + shortcutsBlockH
+                        + kToolbarH + kPadBottom + kOuter;
 
     // 总窗口高度 = 客户区 + 系统标题栏 + 边框（让 CreateWindow 用 OVERLAPPED 风格）
     int cyCaption = GetSystemMetrics(SM_CYCAPTION);
@@ -303,7 +306,9 @@ void FloatWindow::showPanel() {
     m_shortcutCount = shortcutsToShow;
     m_shortcutHeaderY0 = sectionY;
     m_shortcutY0 = sectionY + kSecTitleH;
+    m_toolbarY0 = contentHeight - kPadBottom - kOuter - kToolbarH;
     hoveredRow_ = -1;
+    toolbarHovered_ = false;
 
     RECT rc;
     GetWindowRect(hBtn_, &rc);
@@ -407,7 +412,8 @@ void FloatWindow::drawPanel(HDC hdc) {
     int shortcutsBlockH = (shortcutsToShow > 0)
         ? (kSepGap + kSecTitleH + shortcutsToShow * kScItemH)
         : 0;
-    int height = kOuter + kSmallTitleH + itemCount * kItemH + shortcutsBlockH + kPadBottom + kOuter;
+    int height = kOuter + kSmallTitleH + itemCount * kItemH + shortcutsBlockH
+                 + kToolbarH + kPadBottom + kOuter;
     int width = kPanelWidth;
     REAL rWidth = (REAL)width;
     REAL rHeight = (REAL)height;
@@ -560,6 +566,52 @@ void FloatWindow::drawPanel(HDC hdc) {
             g.DrawString(sc.name.c_str(), -1, &scNameFont, nameRect, &nf, &scNameBrush);
         }
     }
+
+    // ===== 底部工具栏（TTS 朗读按钮） =====
+    int toolbarY = height - kPadBottom - kOuter - kToolbarH;
+    // 顶部分隔线
+    Pen tbSepPen(Color(255, 230, 235, 240), 1.0f);
+    g.DrawLine(&tbSepPen, (REAL)kPadX, (REAL)toolbarY, rWidth - (REAL)kPadX, (REAL)toolbarY);
+
+    // TTS 朗读按钮（圆角矩形 + 图标 + 文字）
+    GraphicsPath tbPath;
+    addRoundRect(tbPath, (REAL)kPadX, (REAL)(toolbarY + 4),
+                 rWidth - (REAL)(kPadX * 2), (REAL)(kToolbarH - 8), 5.0f);
+    if (toolbarHovered_) {
+        SolidBrush tbBg(Color(255, 235, 245, 255));
+        g.FillPath(&tbBg, &tbPath);
+    } else {
+        SolidBrush tbBg(Color(255, 248, 249, 252));
+        g.FillPath(&tbBg, &tbPath);
+    }
+    Pen tbBorder(Color(255, 220, 230, 245), 1.0f);
+    g.DrawPath(&tbBorder, &tbPath);
+
+    // 图标 + 文字
+    Font tbIconFont(&fontFamily, 13, FontStyleBold, UnitPixel);
+    Font tbTextFont(&fontFamily, 11, FontStyleBold, UnitPixel);
+    SolidBrush tbIconBrush(Color(255, 33, 150, 243));
+    SolidBrush tbTextBrush(Color(255, 60, 60, 60));
+    StringFormat tbFmt;
+    tbFmt.SetLineAlignment(StringAlignmentCenter);
+    tbFmt.SetAlignment(StringAlignmentNear);
+    RectF tbIconRect((REAL)(kPadX + 8), (REAL)(toolbarY + 4), 22.0f, (REAL)(kToolbarH - 8));
+    g.DrawString(L"📢", -1, &tbIconFont, tbIconRect, &tbFmt, &tbIconBrush);
+    RectF tbTextRect((REAL)(kPadX + 32), (REAL)(toolbarY + 4),
+                     rWidth - (REAL)(kPadX + 32 + 8), (REAL)(kToolbarH - 8));
+    g.DrawString(L"朗读剪贴板 (TTS)", -1, &tbTextFont, tbTextRect, &tbFmt, &tbTextBrush);
+
+    // 右侧：自动朗读状态指示
+    bool autoSpeak = AppConfig::instance().autoSpeakClipboard();
+    Font tbStatusFont(&fontFamily, 9, FontStyleRegular, UnitPixel);
+    SolidBrush tbStatusBrush(autoSpeak ? Color(255, 76, 175, 80) : Color(255, 160, 160, 160));
+    StringFormat stFmt;
+    stFmt.SetLineAlignment(StringAlignmentCenter);
+    stFmt.SetAlignment(StringAlignmentFar);
+    RectF statusRect((REAL)kPadX, (REAL)(toolbarY + 4),
+                     rWidth - (REAL)(kPadX * 2), (REAL)(kToolbarH - 8));
+    std::wstring statusText = autoSpeak ? L"自动朗读: 开" : L"自动朗读: 关";
+    g.DrawString(statusText.c_str(), -1, &tbStatusFont, statusRect, &stFmt, &tbStatusBrush);
 }
 
 // ============== 窗口过程 ==============
@@ -778,6 +830,19 @@ LRESULT CALLBACK FloatWindow::panelWndProc(HWND hwnd, UINT msg, WPARAM wParam, L
         const int listY = 30;
         const int kItemH = 38;
         const int kScItemH = 32;
+
+        // 先判断是否在底部工具栏区域
+        bool inToolbar = (self->m_toolbarY0 > 0 && y >= self->m_toolbarY0);
+        if (inToolbar != self->toolbarHovered_) {
+            self->toolbarHovered_ = inToolbar;
+            // 重绘工具栏区域
+            RECT rcClient;
+            GetClientRect(hwnd, &rcClient);
+            RECT tr = {0, self->m_toolbarY0, rcClient.right,
+                       self->m_toolbarY0 + kToolbarH + 8};
+            InvalidateRect(hwnd, &tr, FALSE);
+        }
+
         if (y >= listY) {
             if (y < self->m_shortcutY0) {
                 // 常用语区
@@ -812,7 +877,8 @@ LRESULT CALLBACK FloatWindow::panelWndProc(HWND hwnd, UINT msg, WPARAM wParam, L
             invalidateRow(oldRow);
             invalidateRow(newHover);
             // 改变光标为手型，提示"可点击"（hover 之外的视觉反馈）
-            SetCursor(LoadCursor(nullptr, newHover >= 0 ? IDC_HAND : IDC_ARROW));
+            SetCursor(LoadCursor(nullptr,
+                (newHover >= 0 || self->toolbarHovered_) ? IDC_HAND : IDC_ARROW));
         }
         return 0;
     }
@@ -838,6 +904,17 @@ LRESULT CALLBACK FloatWindow::panelWndProc(HWND hwnd, UINT msg, WPARAM wParam, L
             RECT r = {0, ry, rcClient.right, ry + rh};
             InvalidateRect(hwnd, &r, FALSE);
         }
+        // 清空 toolbar hover
+        if (self->toolbarHovered_) {
+            self->toolbarHovered_ = false;
+            RECT rcClient;
+            GetClientRect(hwnd, &rcClient);
+            if (self->m_toolbarY0 > 0) {
+                RECT tr = {0, self->m_toolbarY0, rcClient.right,
+                           self->m_toolbarY0 + kToolbarH + 8};
+                InvalidateRect(hwnd, &tr, FALSE);
+            }
+        }
         return 0;
     }
     case WM_LBUTTONUP: {
@@ -848,6 +925,17 @@ LRESULT CALLBACK FloatWindow::panelWndProc(HWND hwnd, UINT msg, WPARAM wParam, L
         const int kItemH = 38;
         const int kScItemH = 32;
         if (y < listY) return 0;
+
+        // 先判断是否点击底部工具栏（TTS 按钮）
+        if (self->m_toolbarY0 > 0 && y >= self->m_toolbarY0) {
+            // 打开 TTS 对话框，自动读取剪贴板
+            logMsg(L"Clicked TTS toolbar button");
+            TtsDialog::show(self->hInst_);
+            // 点击后关闭面板，避免遮挡 TTS 窗口
+            SetTimer(hwnd, 99, 200, nullptr);
+            return 0;
+        }
+
         if (y < self->m_shortcutY0) {
             // 常用语区：点击复制
             int idx = (y - listY) / kItemH;

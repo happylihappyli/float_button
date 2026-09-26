@@ -18,6 +18,8 @@ public:
     static constexpr UINT WM_TRAY_SETTINGS = WM_USER + 3;
     static constexpr UINT WM_TRAY_EDIT     = WM_USER + 4;
     static constexpr UINT WM_TRAY_SHORTCUTS = WM_USER + 5;
+    static constexpr UINT WM_TRAY_TTS       = WM_USER + 6;
+    static constexpr UINT WM_TRAY_TTS_CLIPBOARD = WM_USER + 7;
 
 private:
     SystemTray() = default;

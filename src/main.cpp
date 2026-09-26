@@ -12,6 +12,8 @@
 #include "settings_dialog.h"
 #include "phrase_edit_dialog.h"
 #include "shortcut_edit_dialog.h"
+#include "tts_dialog.h"
+#include "autostart.h"
 #include "window_helper.h"
 
 #pragma comment(lib, "user32.lib")
@@ -20,12 +22,15 @@
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS")
 
 // 自定义消息 ID
-static constexpr UINT WM_TRAYICON       = WM_USER + 1;
-static constexpr UINT WM_TRAY_TOGGLE    = WM_USER + 2;
-static constexpr UINT WM_TRAY_SETTINGS  = WM_USER + 3;
-static constexpr UINT WM_TRAY_EDIT      = WM_USER + 4;
-static constexpr UINT WM_TRAY_SHORTCUTS = WM_USER + 5;
-static constexpr UINT WM_HOTKEY_PRESSED = WM_USER + 200;
+static constexpr UINT WM_TRAYICON             = WM_USER + 1;
+static constexpr UINT WM_TRAY_TOGGLE          = WM_USER + 2;
+static constexpr UINT WM_TRAY_SETTINGS        = WM_USER + 3;
+static constexpr UINT WM_TRAY_EDIT            = WM_USER + 4;
+static constexpr UINT WM_TRAY_SHORTCUTS       = WM_USER + 5;
+static constexpr UINT WM_TRAY_TTS             = WM_USER + 6;
+static constexpr UINT WM_TRAY_TTS_CLIPBOARD   = WM_USER + 7;
+static constexpr UINT WM_HOTKEY_PRESSED       = WM_USER + 200;
+static constexpr UINT WM_CLIPBOARD_UPDATE     = WM_USER + 201;  // 剪贴板变化通知
 
 // 简易日志
 static std::ofstream g_log;
@@ -92,6 +97,52 @@ LRESULT CALLBACK HiddenWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
         ShortcutEditDialog::show(g_hInst);
         FloatWindow::instance().refreshShortcuts();
         return 0;
+    case WM_TRAY_TTS:
+        FloatWindow::instance().hidePanel();
+        TtsDialog::show(g_hInst);
+        return 0;
+    case WM_TRAY_TTS_CLIPBOARD: {
+        // 直接朗读当前剪贴板内容（不开对话框）
+        FloatWindow::instance().hidePanel();
+        std::wstring txt;
+        if (OpenClipboard(nullptr)) {
+            HANDLE h = GetClipboardData(CF_UNICODETEXT);
+            if (h) {
+                const wchar_t* p = (const wchar_t*)GlobalLock(h);
+                if (p) txt = p;
+                GlobalUnlock(h);
+            }
+            CloseClipboard();
+        }
+        if (!txt.empty()) {
+            TtsDialog::speakText(txt.c_str());
+            logMsg(L"[TTS] Speak clipboard from tray menu");
+        } else {
+            logMsg(L"[TTS] Clipboard empty, nothing to speak");
+        }
+        return 0;
+    }
+    case WM_CLIPBOARD_UPDATE: {
+        // 剪贴板变化通知（如果开启了"剪贴板自动朗读"，自动朗读）
+        if (!AppConfig::instance().autoSpeakClipboard()) {
+            return 0;
+        }
+        std::wstring txt;
+        if (OpenClipboard(nullptr)) {
+            HANDLE h = GetClipboardData(CF_UNICODETEXT);
+            if (h) {
+                const wchar_t* p = (const wchar_t*)GlobalLock(h);
+                if (p) txt = p;
+                GlobalUnlock(h);
+            }
+            CloseClipboard();
+        }
+        if (!txt.empty()) {
+            TtsDialog::speakText(txt.c_str());
+            logMsg(L"[TTS] Auto-speak clipboard on update");
+        }
+        return 0;
+    }
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -102,6 +153,30 @@ LRESULT CALLBACK HiddenWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int) {
     SetUnhandledExceptionFilter(crashHandler);
     logMsg(L"=== WinMain start ===");
+
+    // 加载应用配置（快捷键、自启动、TTS 等）
+    try {
+        AppConfig::instance().load();
+        logMsg(L"AppConfig loaded");
+    } catch (...) {
+        logMsg(L"AppConfig load FAILED");
+    }
+
+    // 同步自启动状态：若 config 标记为开启但注册表缺失（用户可能在外部清掉了），重新写入
+    {
+        bool wantAutoStart = AppConfig::instance().autoStart();
+        bool actuallyEnabled = AutoStart::isEnabled();
+        if (wantAutoStart && !actuallyEnabled) {
+            if (AutoStart::enable()) {
+                logMsg(L"AutoStart re-enabled on startup");
+            } else {
+                logMsg(L"AutoStart re-enable FAILED");
+            }
+        } else if (!wantAutoStart && actuallyEnabled) {
+            // config 显示关闭但注册表还有值：保持现状（用户可能手动开过），不要强行删除
+            logMsg(L"AutoStart registry present but config disabled (kept)");
+        }
+    }
 
     // 加载常用语
     try {
@@ -142,6 +217,14 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int) {
     }
     logMsg(L"Host window created");
 
+    // 注册剪贴板监听（WM_CLIPBOARD_UPDATE）
+    // 用于"剪贴板变化自动朗读"功能
+    if (!AddClipboardFormatListener(hHost)) {
+        logMsg(L"AddClipboardFormatListener FAILED (auto-speak may not work)");
+    } else {
+        logMsg(L"Clipboard format listener registered");
+    }
+
     // 创建悬浮窗
     try {
         if (!FloatWindow::instance().create()) {
@@ -180,6 +263,11 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int) {
             SettingsDialog::show(g_hInst);
             // 不 return，进入主消息循环保持进程运行
         }
+        if (cmd && wcsstr(cmd, L"--test-tts")) {
+            logMsg(L"Test mode: auto-opening TTS window");
+            TtsDialog::show(g_hInst);
+            // 不 return，进入主消息循环保持进程运行
+        }
     }
 
     // 全局快捷键
@@ -213,6 +301,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int) {
     logMsg(L"Message loop exited, cleaning up");
 
     // 清理
+    RemoveClipboardFormatListener(hHost);  // 取消剪贴板监听
     GlobalHotkey::instance().unregister();
     SystemTray::instance().destroy();
     FloatWindow::instance().destroy();

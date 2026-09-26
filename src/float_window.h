@@ -63,6 +63,8 @@ private:
     int m_shortcutCount = 0;   // 实际渲染的快捷程序条数
     int m_shortcutY0 = 0;      // 快捷程序区起始 y（相对面板客户区）
     int m_shortcutHeaderY0 = 0;// "快捷程序"小标题起始 y
+    int m_toolbarY0 = 0;       // 底部工具栏起始 y（相对面板客户区）
+    bool toolbarHovered_ = false;  // 鼠标是否悬停在 TTS 工具栏按钮上
 
     // 内部辅助
     void registerClasses();

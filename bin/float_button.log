@@ -1,11 +1,30 @@
-[9:23:34] === WinMain start ===
-[9:23:34] PhraseManager loaded
-[9:23:34] ShortcutManager loaded
-[9:23:34] Window class registered
-[9:23:34] Host window created
-[9:23:34] FloatWindow created
-[9:23:34] FloatWindow shown
-[9:23:35] Tray created
-[9:23:35] Hotkey [Shift+Win+F] registered OK
-[9:23:35] Entering message loop
-[15:5:55] Copied phrase to clipboard
+[15:19:41] === WinMain start ===
+[15:19:41] AppConfig loaded
+[15:19:41] PhraseManager loaded
+[15:19:41] ShortcutManager loaded
+[15:19:41] Window class registered
+[15:19:41] Host window created
+[15:19:41] Clipboard format listener registered
+[15:19:41] FloatWindow created
+[15:19:41] FloatWindow shown
+[15:19:41] Tray created
+[15:19:41] Test mode: auto-opening TTS window
+[15:19:41] Hotkey [Shift+Win+F] registered OK
+[15:19:41] Entering message loop
+[18:10:0] === WinMain start ===
+[18:10:0] AppConfig loaded
+[18:10:0] PhraseManager loaded
+[18:10:0] ShortcutManager loaded
+[18:10:0] Window class registered
+[18:10:0] Host window created
+[18:10:0] Clipboard format listener registered
+[18:10:0] FloatWindow created
+[18:10:0] FloatWindow shown
+[18:10:0] Tray created
+[18:10:0] Hotkey [Shift+Win+F] registered OK
+[18:10:0] Entering message loop
+[18:10:3] Clicked TTS toolbar button
+[18:10:22] 🔊 正在朗读...
+[18:10:27] ⏹ 已停止
+[18:10:38] 🔊 正在朗读...
+[18:10:46] 🗑 已清空并停止

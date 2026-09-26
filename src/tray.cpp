@@ -57,6 +57,8 @@ void SystemTray::showContextMenu(HWND hwnd) {
     AppendMenuW(menu, MF_STRING, 3, L"Settings... (设置...)");
     AppendMenuW(menu, MF_STRING, 4, L"Edit phrases (编辑常用语)");
     AppendMenuW(menu, MF_STRING, 5, L"Edit shortcuts (编辑快捷程序)");
+    AppendMenuW(menu, MF_STRING, 6, L"TTS 朗读对话框...");
+    AppendMenuW(menu, MF_STRING, 7, L"朗读当前剪贴板");
     AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
     AppendMenuW(menu, MF_STRING, 2, L"Exit (退出)");
 
@@ -83,6 +85,12 @@ void SystemTray::showContextMenu(HWND hwnd) {
         break;
     case 5:
         PostMessage(hwnd, WM_TRAY_SHORTCUTS, 0, 0);
+        break;
+    case 6:
+        PostMessage(hwnd, WM_TRAY_TTS, 0, 0);
+        break;
+    case 7:
+        PostMessage(hwnd, WM_TRAY_TTS_CLIPBOARD, 0, 0);
         break;
     }
 }

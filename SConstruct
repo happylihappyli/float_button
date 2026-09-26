@@ -34,6 +34,10 @@ SOURCES = [
     "src/phrase_edit_dialog.cpp",
     "src/config.cpp",
     "src/settings_dialog.cpp",
+    "src/tts_dialog.cpp",
+    "src/autostart.cpp",
+    "src/llm_client.cpp",
+    "src/llm_settings_dialog.cpp",
 ]
 
 # 资源文件（.rc 会引用 res/app_icon.ico）
@@ -44,7 +48,8 @@ RES_SOURCES = [
 # Windows 库
 LIBS = [
     "user32", "gdi32", "gdiplus", "shell32", "comctl32",
-    "comdlg32", "advapi32", "ole32", "uuid",
+    "comdlg32", "advapi32", "ole32", "uuid", "sapi",
+    "wininet",
 ]
 
 # ============================================================
